@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
          */
 
         //Coroutines Context
+        /*
         GlobalScope.launch(Dispatchers.IO){
             Log.d(TAG, "Starting coroutine in thread ${Thread.currentThread().name}")
             val answer = doNetworkCall()
@@ -43,14 +44,32 @@ class MainActivity : AppCompatActivity() {
                 tvDummy.text = answer
             }
         }
+         */
 
+        Log.d(TAG, "Before runBlocking")
+        runBlocking {
+            launch(Dispatchers.IO) {
+                delay(3000L)
+                Log.d(TAG, "Finished IO Coroutine 1")
+            }
+            launch(Dispatchers.IO) {
+                delay(3000L)
+                Log.d(TAG, "Finished IO Coroutine 2")
+            }
+            Log.d(TAG, "Start of runBlocking")
+            delay(100L)
+            Log.d(TAG, "End of runBlocking")
+        }
+        Log.d(TAG, "After runBlocking")
     }
 
     //Coroutines Context
+    /*
     suspend fun doNetworkCall(): String{
         delay(30000L)
         return "This is the answer"
     }
+     */
 
     //Suspend Functions
     /*
